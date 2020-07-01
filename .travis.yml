@@ -1,0 +1,11 @@
+language: generic
+services:
+  - docker
+jobs:
+  include:
+    - stage: build-and-test
+      name: Build and Test
+      script:
+        - scripts/build-and-run.sh
+      after_success:
+        - docker-compose --file docker-micro.yml --file docker-micro-scan.yml up --abort-on-container-exit
