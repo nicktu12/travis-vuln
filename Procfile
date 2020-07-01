@@ -1,1 +1,0 @@
-web: gunicorn vuln_django.wsgi --log-file -

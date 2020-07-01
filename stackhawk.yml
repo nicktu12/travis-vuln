@@ -1,77 +1,40 @@
 app:
-  applicationId: ${APP_ID:a629eeae-4bb9-4918-b3eb-bb141b4e8918} # This is my AppID. There are many like it, but this one is mine.
-  # applicationId: 4edd858d-86b7-4112-91bb-acf3fc984b6a
-  env: ${APP_ENV:Development}
-  # The url of your application to scan
-  host: ${HOST:http://localhost:8020} # (required)
-  # Our scanner's capability is still in Alpha; If we notice a bug we'll use this email to reach out or provide a fix.
-  # We will never use this contact for marketing purposes.
-  contactEmail: scott.gerlach@sterkherk.kerm # (optional)
-  # The risk level of the app
-  riskLevel: MEDIUM # (optional)
-  # The type of data sensitivity the web app maintains
-  appDataType: PII # (optional)
-
-#  # The name of your anti csrf parameter
-  antiCsrfParam: csrfmiddlewaretoken # (optional)
+  applicationId: f2ea7ecb-6ffe-497c-a123-d8b56c4c01f4
+  env: ${APP_ENV:Travis CI}
+  host: ${HOST:http://localhost:8020}
+  riskLevel: MEDIUM
+  appDataType: PII
+  antiCsrfParam: csrfmiddlewaretoken
   excludePaths:
     - /admin/logout/ # the scanner will log itself out if you don't ignore here
     - /admin/password_change/
-#
-#  # Form POST based authentication configuration for scanning as a user.
-#  # Enabling will force the scanner to scan as an
-#  # authenticated user of your app.
-#  # Authenticated requests will pass cookies received from the form POST
-#  # to maintain authentication.
   authentication:
-#    # A regex to match against http responses to determine if the scan user is
-#    # still logged in to your app
-    loggedInIndicator: "\\QLog Out\\E" # (required)
-#    # A regex to match against http responses to determine if the scan user is
-#    # logged out of your app
-    loggedOutIndicator: "\\Qlogin-form\\E" # (required)
-#   # A page that is only accessible being logged in. We will try to access this page
-#   # to validate authentication worked
+    loggedInIndicator: "\\QLog Out\\E"
+    loggedOutIndicator: "\\Qlogin-form\\E"
     testPath:
       path: /admin/auth/user/
       type: HEADER
       success: ".*200.*"
-#   # What kind of thing will the browser pass to the server to prove it's logged in
     cookieAuthorization:
       cookieNames:
         - "token"
         - "csrftoken"
     usernamePassword:
-
-      type: FORM # (optional)
-#    # The route to a form POST to authenticate a user
-      loginPath: /admin/login/ # (required)
-#    # The route to logout a user
-      logoutPath: /admin/logout/ # (required)
-#    # The username field name in your authentication form
-      usernameField: username # (required)
-#    # The password field name in your authentication form.
-      passwordField: password # (required)
-#    # Other parameters that may be required by your log in form
-      otherParams: # (optional)
+      type: FORM
+      loginPath: /admin/login/
+      logoutPath: /admin/logout/
+      usernameField: username
+      passwordField: password
+      otherParams:
         - name: next  # The login form parameter is needed to make login work
           val: "/admin/"
-#    # The username to authenticate as when scanning
-      scanUsername: admin # (required)
-#    # The password of the scanUsername
-      scanPassword: adminpassword # (required)
+      scanUsername: admin # You created this user with the ‘createsuperuser’ command. Enter that info here
+      scanPassword: adminpassword
 hawk:
-#  # Web crawler / spider configuration
   spider:
-#    # Enable the base spider for discovering your app's routes
-    base: true # (default)
-#    # Enable the ajax spider for discovering your single page app
-#    ajax: false # (default)
-#    # Maximum time for spider to discover routes in your app
-#    maxDurationMinutes: 2 # (default)
-#  # Maximum time to wait for the scanner to start up
-#  startupTimeoutMinutes: 5 # (default)
+    base: false
   config:
     - "spider.processform=true"
     - "spider.postform=false"
     - "spider.handleParameters=IGNORE_VALUE"
+
