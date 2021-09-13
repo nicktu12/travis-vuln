@@ -1,4 +1,4 @@
 app:
-  applicationId: xxXXXXXX-xXXX-xxXX-XXxX-xXXxxXXXXxXX
+  applicationId: 2271def2-3758-4e06-b231-0493f842933c
   host: http://example.com
   env: Development
