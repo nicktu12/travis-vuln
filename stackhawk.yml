@@ -1,40 +1,4 @@
 app:
-  applicationId: f2ea7ecb-6ffe-497c-a123-d8b56c4c01f4
-  env: ${APP_ENV:Travis CI}
-  host: ${HOST:http://localhost:8020}
-  riskLevel: MEDIUM
-  appDataType: PII
-  antiCsrfParam: csrfmiddlewaretoken
-  excludePaths:
-    - /admin/logout/ # the scanner will log itself out if you don't ignore here
-    - /admin/password_change/
-  authentication:
-    loggedInIndicator: "\\QLog Out\\E"
-    loggedOutIndicator: "\\Qlogin-form\\E"
-    testPath:
-      path: /admin/auth/user/
-      type: HEADER
-      success: ".*200.*"
-    cookieAuthorization:
-      cookieNames:
-        - "token"
-        - "csrftoken"
-    usernamePassword:
-      type: FORM
-      loginPath: /admin/login/
-      logoutPath: /admin/logout/
-      usernameField: username
-      passwordField: password
-      otherParams:
-        - name: next  # The login form parameter is needed to make login work
-          val: "/admin/"
-      scanUsername: admin # You created this user with the ‘createsuperuser’ command. Enter that info here
-      scanPassword: adminpassword
-hawk:
-  spider:
-    base: false
-  config:
-    - "spider.processform=true"
-    - "spider.postform=false"
-    - "spider.handleParameters=IGNORE_VALUE"
-
+  applicationId: xxXXXXXX-xXXX-xxXX-XXxX-xXXxxXXXXxXX
+  host: http://example.com
+  env: Development
